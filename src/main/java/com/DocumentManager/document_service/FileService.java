@@ -28,7 +28,7 @@ public class FileService {
             storage.create(blobInfo, file.getBytes());
 
             // Enviar notificación de subida
-            kafkaProducer.sendNotification("Archivo subido: " + fileName);
+            //kafkaProducer.sendNotification("Archivo subido: " + fileName);
             return String.format("https://storage.googleapis.com/%s/%s", bucketName, fileName);
         } catch (IOException e) {
             throw new RuntimeException("Error subiendo archivo a GCP", e);
@@ -43,7 +43,7 @@ public class FileService {
             blob.downloadTo(Paths.get(tempFilePath));
 
             // Enviar notificación de descarga
-            kafkaProducer.sendNotification("Archivo descargado: " + fileName);
+            //kafkaProducer.sendNotification("Archivo descargado: " + fileName);
             return tempFilePath;
         } catch (Exception e) {
             throw new RuntimeException("Error descargando archivo de GCP", e);
@@ -56,7 +56,7 @@ public class FileService {
             storage.delete(blobId);
 
             // Enviar notificación de eliminación
-            kafkaProducer.sendNotification("Archivo eliminado: " + fileName);
+            //kafkaProducer.sendNotification("Archivo eliminado: " + fileName);
             return "Archivo eliminado correctamente";
         } catch (Exception e) {
             throw new RuntimeException("Error eliminando archivo de GCP", e);
